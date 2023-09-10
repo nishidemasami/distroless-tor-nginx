@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      dockerfile: ./nginx/Dockerfile
+    networks:
+      - tor_network
+    volumes:
+      - ./nginx/settings:/etc/nginx/sites-enabled:ro
+      - ./htdocs:/usr/share/nginx/html:ro
+    restart: unless-stopped
+  tor:
+    build:
+      dockerfile: ./tor/Dockerfile
+    networks:
+      - tor_network
+      - front
+    volumes:
+      - ./data:/var/lib/tor
+      - ./tor/settings:/etc/tor
+    restart: unless-stopped
+
+networks:
+  front:
+  tor_network:
+    internal: true
