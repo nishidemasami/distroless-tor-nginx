@@ -17,7 +17,7 @@ RUN apt update && \
   cp -a --parents /lib/x86_64-linux-gnu/libz.so.* /opt && \
   cp -a --parents /lib/x86_64-linux-gnu/libc.so.* /opt
 
-FROM gcr.io/distroless/base-debian12
+FROM gcr.io/distroless/base-nossl-debian12:latest
 COPY --from=build /opt /
 
 EXPOSE 80

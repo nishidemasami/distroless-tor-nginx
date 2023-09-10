@@ -21,7 +21,7 @@ RUN apt update && \
   cp -a --parents /lib/x86_64-linux-gnu/liblz4.so.* /opt && \
   cp -a --parents /lib/x86_64-linux-gnu/libgpg-error.so.* /opt
 
-FROM gcr.io/distroless/base-debian12
+FROM gcr.io/distroless/base-nossl-debian12:latest
 COPY --from=build /opt /
 
 ENTRYPOINT  ["/usr/bin/tor"]
